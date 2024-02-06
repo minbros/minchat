@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+        padding: const EdgeInsets.only(top: 250),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -23,13 +24,10 @@ class HomePage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.only(top: 250),
-                child: const Icon(
-                  Icons.emoji_emotions,
-                  size: 100,
-                  color: Colors.white70,
-                ),
+              const Icon(
+                Icons.emoji_emotions,
+                size: 100,
+                color: Colors.white70,
               ),
               const Text(
                 'MIN CHAT',
@@ -51,7 +49,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -81,7 +79,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
                     );
                   },
                   style: OutlinedButton.styleFrom(
@@ -102,7 +100,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 260,
+                height: 250,
               ),
               GestureDetector(
                 onTap: () {}, // '게스트로 계속' 구현 필요

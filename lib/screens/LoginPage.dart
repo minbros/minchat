@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           width: screenWidth * 0.8,
                           child: GestureDetector(
-                            onTap: () {},   // 비밀번호 찾기 기능 구현 필요
+                            onTap: () {}, // 비밀번호 찾기 기능 구현 필요
                             child: const Text(
                               'Forgot Password?',
                               style: TextStyle(
@@ -191,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                           width: screenWidth * 0.8,
                           height: 45,
                           child: ElevatedButton(
-                            onPressed: () {},   // 로그인 이후 구현 필요
+                            onPressed: () {}, // 로그인 이후 구현 필요
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
                               elevation: 4,
@@ -208,6 +208,58 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
+                        ),
+                        const SizedBox(
+                          height: 90,
+                        ),
+                        const Divider(
+                          color: Colors.white70,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: screenWidth * 0.385,
+                              height: 45,
+                              child: ElevatedButton(
+                                onPressed: () {},   // 구글로 로그인 기능 구현 필요
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  elevation: 4,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Container(
+                                  margin: const EdgeInsets.all(5),
+                                  child: Image.asset('assets/login_google.png'),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: screenWidth * 0.03,
+                            ),
+                            SizedBox(
+                              width: screenWidth * 0.385,
+                              height: 45,
+                              child: ElevatedButton(
+                                onPressed: () {},   // 페이스북으로 로그인 기능 구현 필요
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  elevation: 4,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Container(
+                                  margin: const EdgeInsets.all(5),
+                                  child: Image.asset('assets/login_facebook.png'),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
