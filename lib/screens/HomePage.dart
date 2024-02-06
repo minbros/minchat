@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minchat/screens/LoginPage.dart';
+import 'LoginPage.dart';
+import 'SignUpPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,8 +10,9 @@ class HomePage extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
-        padding: const EdgeInsets.only(top: 250),
+        padding: const EdgeInsets.only(top: 250, bottom: 50),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -79,7 +81,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginPage()),
+                      MaterialPageRoute(builder: (context) => const SignUpPage()),
                     );
                   },
                   style: OutlinedButton.styleFrom(
@@ -99,19 +101,24 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 250,
-              ),
-              GestureDetector(
-                onTap: () {}, // '게스트로 계속' 구현 필요
-                child: const Text(
-                  'Continue to as a guest',
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    decorationColor: Colors.white70,
-                    decorationStyle: TextDecorationStyle.dotted,
-                    color: Colors.white,
-                    fontFamily: 'Geo',
+              // const SizedBox(
+              //   height: 250,
+              // ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: GestureDetector(
+                    onTap: () {}, // '게스트로 계속' 구현 필요
+                    child: const Text(
+                      'Continue to as a guest',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.white70,
+                        decorationStyle: TextDecorationStyle.dotted,
+                        color: Colors.white,
+                        fontFamily: 'Geo',
+                      ),
+                    ),
                   ),
                 ),
               ),

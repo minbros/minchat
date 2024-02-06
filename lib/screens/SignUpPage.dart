@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'SignUpPage.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final FocusNode _focusNode = FocusNode();
   bool _isVisible = false;
+  bool _isVisible2 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +78,13 @@ class _LoginPageState extends State<LoginPage> {
                               // enabledBorder는 활성화 상태일 때의 경계선을 설정함
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              BorderRadius.all(Radius.circular(10)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              BorderRadius.all(Radius.circular(10)),
                             ),
                             hintText: 'Email Address',
                             hintStyle: TextStyle(
@@ -121,13 +121,13 @@ class _LoginPageState extends State<LoginPage> {
                                 // enabledBorder는 활성화 상태일 때의 경계선을 설정함
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                BorderRadius.all(Radius.circular(10)),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                BorderRadius.all(Radius.circular(10)),
                               ),
                               hintText: 'Password',
                               hintStyle: const TextStyle(
@@ -145,18 +145,18 @@ class _LoginPageState extends State<LoginPage> {
                               border: InputBorder.none,
                               suffixIcon: _focusNode.hasFocus
                                   ? IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isVisible = !_isVisible;
-                                        });
-                                      },
-                                      icon: Icon(
-                                        _isVisible
-                                            ? Icons.visibility_off_outlined
-                                            : Icons.visibility_outlined,
-                                      ),
-                                      color: Colors.white70,
-                                    )
+                                onPressed: () {
+                                  setState(() {
+                                    _isVisible = !_isVisible;
+                                  });
+                                },
+                                icon: Icon(
+                                  _isVisible
+                                      ? Icons.visibility_off_outlined
+                                      : Icons.visibility_outlined,
+                                ),
+                                color: Colors.white70,
+                              )
                                   : null,
                             ),
                             style: const TextStyle(
@@ -173,24 +173,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(
                   height: 15,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: GestureDetector(
-                    onTap: () {}, // 비밀번호 찾기 기능 구현 필요
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Geo',
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.white70,
-                        decorationStyle: TextDecorationStyle.dotted,
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
                 ),
                 const SizedBox(
                   height: 30,
