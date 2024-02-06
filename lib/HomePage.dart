@@ -24,10 +24,10 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 220),
+                padding: const EdgeInsets.only(top: 250),
                 child: const Icon(
-                  Icons.people,
-                  size: 150,
+                  Icons.emoji_emotions,
+                  size: 100,
                   color: Colors.white70,
                 ),
               ),
@@ -35,14 +35,14 @@ class HomePage extends StatelessWidget {
                 'MIN CHAT',
                 style: TextStyle(
                     fontSize: 30,
-                    letterSpacing: 2,
+                    letterSpacing: 0.5,
                     wordSpacing: 1,
                     fontWeight: FontWeight.bold,
                     color: Colors.white70,
                     fontFamily: 'Gilroy'),
               ),
               const SizedBox(
-                height: 50,
+                height: 70,
               ),
               SizedBox(
                 width: screenWidth * 0.75,
