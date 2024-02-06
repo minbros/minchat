@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'LoginPage.dart';
-import 'SignUpPage.dart';
+import 'login_page.dart';
+import 'sign_up_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,7 +12,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: const EdgeInsets.only(top: 250, bottom: 50),
+        padding: EdgeInsets.fromLTRB(
+          screenWidth * 0.1,
+          250,
+          screenWidth * 0.1,
+          50,
+        ),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -45,13 +50,15 @@ class HomePage extends StatelessWidget {
                 height: 70,
               ),
               SizedBox(
-                width: screenWidth * 0.8,
+                width: double.infinity,
+                // 상위 컨테이너에서 padding을 해줬기 때문에 가로로 끝까지 늘리기만 하면 됨
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -75,13 +82,14 @@ class HomePage extends StatelessWidget {
                 height: 10,
               ),
               SizedBox(
-                width: screenWidth * 0.8,
+                width: double.infinity,
                 height: 45,
                 child: OutlinedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SignUpPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
                     );
                   },
                   style: OutlinedButton.styleFrom(

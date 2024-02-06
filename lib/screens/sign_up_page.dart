@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:minchat/screens/login_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -8,9 +10,20 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final FocusNode _focusNode = FocusNode();
-  bool _isVisible = false;
-  bool _isVisible2 = false;
+  final FocusNode _firstFocusNode = FocusNode();
+  final FocusNode _secondFocusNode = FocusNode();
+  bool _isPasswordVisible = false;
+  bool _isConfirmVisible = false;
+
+  @override
+  void dispose() {
+    _firstFocusNode.dispose();
+    _secondFocusNode.dispose();
+    super.dispose();
+  }
+
+  // .dispose()는 리소스 해제 및 클린업 작업을 담당하는 메소드
+  // 이걸 해줘야 포커스가 하나에만 잡힐 수 있음
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +58,7 @@ class _SignUpPageState extends State<SignUpPage> {
               children: [
                 // Welcome,
                 const Text(
-                  'Welcome,',
+                  'Create Account',
                   style: TextStyle(
                     fontFamily: 'Geo',
                     fontWeight: FontWeight.bold,
@@ -55,11 +68,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 // Glad to see you!
                 const Text(
-                  'Glad to see you!',
+                  'to get started now!',
                   style: TextStyle(
                     fontFamily: 'Geo',
                     fontSize: 33,
-                    letterSpacing: -1,
+                    letterSpacing: -0.5,
                     color: Colors.white,
                   ),
                 ),
@@ -78,13 +91,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               // enabledBorder는 활성화 상태일 때의 경계선을 설정함
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius:
-                              BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius:
-                              BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             hintText: 'Email Address',
                             hintStyle: TextStyle(
@@ -114,20 +127,20 @@ class _SignUpPageState extends State<SignUpPage> {
                         // 비밀번호 입력란
                         Focus(
                           child: TextFormField(
-                            focusNode: _focusNode,
-                            obscureText: _isVisible ? false : true,
+                            focusNode: _firstFocusNode,
+                            obscureText: _isPasswordVisible ? false : true,
                             decoration: InputDecoration(
                               enabledBorder: const OutlineInputBorder(
                                 // enabledBorder는 활성화 상태일 때의 경계선을 설정함
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10)),
+                                    BorderRadius.all(Radius.circular(10)),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10)),
+                                    BorderRadius.all(Radius.circular(10)),
                               ),
                               hintText: 'Password',
                               hintStyle: const TextStyle(
@@ -143,20 +156,80 @@ class _SignUpPageState extends State<SignUpPage> {
                               filled: true,
                               fillColor: Colors.white12,
                               border: InputBorder.none,
-                              suffixIcon: _focusNode.hasFocus
+                              suffixIcon: _firstFocusNode.hasFocus
                                   ? IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _isVisible = !_isVisible;
-                                  });
-                                },
-                                icon: Icon(
-                                  _isVisible
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_outlined,
-                                ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _isPasswordVisible =
+                                              !_isPasswordVisible;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        _isPasswordVisible
+                                            ? Icons.visibility_off_outlined
+                                            : Icons.visibility_outlined,
+                                      ),
+                                      color: Colors.white70,
+                                    )
+                                  : null,
+                            ),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontFamily: 'Geo',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Focus(
+                          child: TextFormField(
+                            focusNode: _secondFocusNode,
+                            obscureText: _isConfirmVisible ? false : true,
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                // enabledBorder는 활성화 상태일 때의 경계선을 설정함
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              hintText: 'Confirm Password',
+                              hintStyle: const TextStyle(
+                                fontSize: 14,
                                 color: Colors.white70,
-                              )
+                                fontFamily: 'Geo',
+                                fontWeight: FontWeight.bold,
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 15,
+                              ),
+                              filled: true,
+                              fillColor: Colors.white12,
+                              border: InputBorder.none,
+                              suffixIcon: _secondFocusNode.hasFocus
+                                  ? IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _isConfirmVisible =
+                                              !_isConfirmVisible;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        _isConfirmVisible
+                                            ? Icons.visibility_off_outlined
+                                            : Icons.visibility_outlined,
+                                      ),
+                                      color: Colors.white70,
+                                    )
                                   : null,
                             ),
                             style: const TextStyle(
@@ -172,16 +245,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 15,
-                ),
-                const SizedBox(
                   height: 30,
                 ),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
                   child: ElevatedButton(
-                    onPressed: () {}, // 로그인 이후 구현 필요
+                    onPressed: () {}, // 회원 가입 이후 구현 필요
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       elevation: 4,
@@ -190,7 +260,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     child: const Text(
-                      'LOGIN',
+                      'SIGN UP',
                       style: TextStyle(
                         color: Colors.black87,
                         fontFamily: 'Gilroy',
@@ -200,7 +270,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 90,
+                  height: 80,
                 ),
                 const Divider(
                   color: Colors.white70,
@@ -255,17 +325,17 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: RichText(
-                      text: const TextSpan(
-                        text: 'Don\'t have an account? ',
-                        style: TextStyle(
+                      text: TextSpan(
+                        text: 'Already have an account? ',
+                        style: const TextStyle(
                           fontSize: 14,
                           fontFamily: 'Geo',
                           color: Colors.black87,
                         ),
                         children: [
                           TextSpan(
-                            text: 'Sign Up Now',
-                            style: TextStyle(
+                            text: 'Login Now',
+                            style: const TextStyle(
                               fontSize: 14,
                               fontFamily: 'Geo',
                               color: Colors.white,
@@ -273,6 +343,15 @@ class _SignUpPageState extends State<SignUpPage> {
                               decorationStyle: TextDecorationStyle.dotted,
                               decorationColor: Colors.white70,
                             ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  ),
+                                );
+                              },
                           ),
                         ],
                       ),

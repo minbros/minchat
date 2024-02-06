@@ -1,5 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'SignUpPage.dart';
+import 'sign_up_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -29,9 +30,9 @@ class _LoginPageState extends State<LoginPage> {
             screenWidth * 0.1,
             50,
           ),
-          // 배경 그라데이션
           decoration: const BoxDecoration(
             gradient: LinearGradient(
+              // 배경 그라데이션
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
@@ -43,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
           child: Center(
             child: Column(
               children: [
-                // Welcome,
                 const Text(
                   'Welcome,',
                   style: TextStyle(
@@ -53,13 +53,12 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                   ),
                 ),
-                // Glad to see you!
                 const Text(
                   'Glad to see you!',
                   style: TextStyle(
                     fontFamily: 'Geo',
                     fontSize: 33,
-                    letterSpacing: -1,
+                    letterSpacing: -0.5,
                     color: Colors.white,
                   ),
                 ),
@@ -218,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 90,
+                  height: 80,
                 ),
                 const Divider(
                   color: Colors.white70,
@@ -273,9 +272,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: RichText(
-                      text: const TextSpan(
+                      text: TextSpan(
                         text: 'Don\'t have an account? ',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           fontFamily: 'Geo',
                           color: Colors.black87,
@@ -283,7 +282,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           TextSpan(
                             text: 'Sign Up Now',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontFamily: 'Geo',
                               color: Colors.white,
@@ -291,6 +290,15 @@ class _LoginPageState extends State<LoginPage> {
                               decorationStyle: TextDecorationStyle.dotted,
                               decorationColor: Colors.white70,
                             ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignUpPage(),
+                                  ),
+                                );
+                              },
                           ),
                         ],
                       ),
