@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:minchat/HomePage.dart';
+import 'package:minchat/screens/HomePage.dart';
 
 void main() {
   runApp(const MyApp());

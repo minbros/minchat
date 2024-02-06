@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minchat/LoginPage.dart';
+import 'package:minchat/screens/LoginPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                 height: 70,
               ),
               SizedBox(
-                width: screenWidth * 0.75,
+                width: screenWidth * 0.8,
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                 height: 10,
               ),
               SizedBox(
-                width: screenWidth * 0.75,
+                width: screenWidth * 0.8,
                 height: 45,
                 child: OutlinedButton(
                   onPressed: () {
@@ -111,7 +111,6 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(
                     decoration: TextDecoration.underline,
                     decorationColor: Colors.white70,
-                    decorationThickness: 2.0,
                     decorationStyle: TextDecorationStyle.dotted,
                     color: Colors.white,
                     fontFamily: 'Geo',
