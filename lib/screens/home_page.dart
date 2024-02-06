@@ -11,6 +11,9 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      // 키보드 같은 거 불러왔을 때 화면 조정이 안되게끔 함
+      // 화면 조정이 될 경우,
+      // bottom에 정렬된 위젯이 키보드 위로 올라와서 위젯이 겹쳐버려서 에러가 발생하게 됨
       body: Container(
         padding: EdgeInsets.fromLTRB(
           screenWidth * 0.1,
