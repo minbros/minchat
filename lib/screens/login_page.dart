@@ -10,7 +10,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final FocusNode _focusNode = FocusNode();
   bool _isVisible = false;
 
   @override
@@ -111,59 +110,54 @@ class _LoginPageState extends State<LoginPage> {
                           height: 10,
                         ),
                         // 비밀번호 입력란
-                        Focus(
-                          child: TextFormField(
-                            focusNode: _focusNode,
-                            obscureText: _isVisible ? false : true,
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                // enabledBorder는 활성화 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              hintText: 'Password',
-                              hintStyle: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.white70,
-                                fontFamily: 'Geo',
-                                fontWeight: FontWeight.bold,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 15,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white12,
-                              border: InputBorder.none,
-                              suffixIcon: _focusNode.hasFocus
-                                  ? IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isVisible = !_isVisible;
-                                        });
-                                      },
-                                      icon: Icon(
-                                        _isVisible
-                                            ? Icons.visibility_off_outlined
-                                            : Icons.visibility_outlined,
-                                      ),
-                                      color: Colors.white70,
-                                    )
-                                  : null,
+                        TextFormField(
+                          obscureText: _isVisible ? false : true,
+                          decoration: InputDecoration(
+                            enabledBorder: const OutlineInputBorder(
+                              // enabledBorder는 활성화 상태일 때의 경계선을 설정함
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
-                            style: const TextStyle(
+                            focusedBorder: const OutlineInputBorder(
+                              // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            hintText: 'Password',
+                            hintStyle: const TextStyle(
                               fontSize: 14,
-                              color: Colors.white,
+                              color: Colors.white70,
                               fontFamily: 'Geo',
                               fontWeight: FontWeight.bold,
                             ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white12,
+                            border: InputBorder.none,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isVisible = !_isVisible;
+                                });
+                              },
+                              icon: Icon(
+                                _isVisible
+                                    ? Icons.visibility_off_outlined
+                                    : Icons.visibility_outlined,
+                              ),
+                              color: Colors.white70,
+                            ),
+                          ),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontFamily: 'Geo',
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],

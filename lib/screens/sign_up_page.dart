@@ -10,17 +10,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final FocusNode _firstFocusNode = FocusNode();
-  final FocusNode _secondFocusNode = FocusNode();
-  bool _isPasswordVisible = false;
-  bool _isConfirmVisible = false;
-
-  @override
-  void dispose() {
-    _firstFocusNode.dispose();
-    _secondFocusNode.dispose();
-    super.dispose();
-  }
+  bool _isVisible = false;
 
   // .dispose()는 리소스 해제 및 클린업 작업을 담당하는 메소드
   // 이걸 해줘야 포커스가 하나에만 잡힐 수 있음
@@ -125,119 +115,107 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 10,
                         ),
                         // 비밀번호 입력란
-                        Focus(
-                          child: TextFormField(
-                            focusNode: _firstFocusNode,
-                            obscureText: _isPasswordVisible ? false : true,
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                // enabledBorder는 활성화 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              hintText: 'Password',
-                              hintStyle: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.white70,
-                                fontFamily: 'Geo',
-                                fontWeight: FontWeight.bold,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 15,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white12,
-                              border: InputBorder.none,
-                              suffixIcon: _firstFocusNode.hasFocus
-                                  ? IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isPasswordVisible =
-                                              !_isPasswordVisible;
-                                        });
-                                      },
-                                      icon: Icon(
-                                        _isPasswordVisible
-                                            ? Icons.visibility_off_outlined
-                                            : Icons.visibility_outlined,
-                                      ),
-                                      color: Colors.white70,
-                                    )
-                                  : null,
+                        TextFormField(
+                          obscureText: _isVisible ? false : true,
+                          decoration: InputDecoration(
+                            enabledBorder: const OutlineInputBorder(
+                              // enabledBorder는 활성화 상태일 때의 경계선을 설정함
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
-                            style: const TextStyle(
+                            focusedBorder: const OutlineInputBorder(
+                              // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            hintText: 'Password',
+                            hintStyle: const TextStyle(
                               fontSize: 14,
-                              color: Colors.white,
+                              color: Colors.white70,
                               fontFamily: 'Geo',
                               fontWeight: FontWeight.bold,
                             ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white12,
+                            border: InputBorder.none,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isVisible = !_isVisible;
+                                });
+                              },
+                              icon: Icon(
+                                _isVisible
+                                    ? Icons.visibility_off_outlined
+                                    : Icons.visibility_outlined,
+                              ),
+                              color: Colors.white70,
+                            ),
+                          ),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontFamily: 'Geo',
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        Focus(
-                          child: TextFormField(
-                            focusNode: _secondFocusNode,
-                            obscureText: _isConfirmVisible ? false : true,
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                // enabledBorder는 활성화 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              hintText: 'Confirm Password',
-                              hintStyle: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.white70,
-                                fontFamily: 'Geo',
-                                fontWeight: FontWeight.bold,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 15,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white12,
-                              border: InputBorder.none,
-                              suffixIcon: _secondFocusNode.hasFocus
-                                  ? IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isConfirmVisible =
-                                              !_isConfirmVisible;
-                                        });
-                                      },
-                                      icon: Icon(
-                                        _isConfirmVisible
-                                            ? Icons.visibility_off_outlined
-                                            : Icons.visibility_outlined,
-                                      ),
-                                      color: Colors.white70,
-                                    )
-                                  : null,
+                        TextFormField(
+                          obscureText: _isVisible ? false : true,
+                          decoration: InputDecoration(
+                            enabledBorder: const OutlineInputBorder(
+                              // enabledBorder는 활성화 상태일 때의 경계선을 설정함
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
-                            style: const TextStyle(
+                            focusedBorder: const OutlineInputBorder(
+                              // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            hintText: 'Confirm Password',
+                            hintStyle: const TextStyle(
                               fontSize: 14,
-                              color: Colors.white,
+                              color: Colors.white70,
                               fontFamily: 'Geo',
                               fontWeight: FontWeight.bold,
                             ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white12,
+                            border: InputBorder.none,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isVisible = !_isVisible;
+                                });
+                              },
+                              icon: Icon(
+                                _isVisible
+                                    ? Icons.visibility_off_outlined
+                                    : Icons.visibility_outlined,
+                              ),
+                              color: Colors.white70,
+                            ),
+                          ),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontFamily: 'Geo',
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
