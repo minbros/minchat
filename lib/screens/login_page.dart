@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -25,9 +26,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Container(
           padding: EdgeInsets.fromLTRB(
             screenWidth * 0.1,
-            150,
+            screenHeight * 0.17,
             screenWidth * 0.1,
-            50,
+            screenHeight * 0.06,
           ),
           decoration: const BoxDecoration(
             gradient: LinearGradient(

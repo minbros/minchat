@@ -8,6 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -17,9 +18,9 @@ class HomePage extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.fromLTRB(
           screenWidth * 0.1,
-          250,
+          screenHeight * 0.3,
           screenWidth * 0.1,
-          50,
+          screenHeight * 0.06,
         ),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
