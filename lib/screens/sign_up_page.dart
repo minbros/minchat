@@ -67,8 +67,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: screenHeight * 0.024,
                 ),
                 SizedBox(
                   child: Form(
@@ -223,8 +223,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: screenHeight * 0.035,
                 ),
                 SizedBox(
                   width: double.infinity,
@@ -248,14 +248,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 80,
+                SizedBox(
+                  height: screenHeight * 0.092,
                 ),
                 const Divider(
                   color: Colors.white70,
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: screenHeight * 0.024,
                 ),
                 Row(
                   children: [

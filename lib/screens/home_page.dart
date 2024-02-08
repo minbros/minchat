@@ -35,28 +35,28 @@ class HomePage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const Icon(
+              Icon(
                 Icons.emoji_emotions,
-                size: 100,
+                size: screenHeight * 0.115,   // pixel 7 기준 100
                 color: Colors.white70,
               ),
-              const Text(
+              Text(
                 'MIN CHAT',
                 style: TextStyle(
-                    fontSize: 30,
+                    fontSize: screenHeight * 0.035,   // pixel 7 기준 30
                     letterSpacing: 0.5,
                     wordSpacing: 1,
                     fontWeight: FontWeight.bold,
                     color: Colors.white70,
                     fontFamily: 'Gilroy'),
               ),
-              const SizedBox(
-                height: 70,
+              SizedBox(
+                height: screenHeight * 0.08,
               ),
               SizedBox(
                 width: double.infinity,
                 // 상위 컨테이너에서 padding을 해줬기 때문에 가로로 끝까지 늘리기만 하면 됨
-                height: 45,
+                height: screenHeight * 0.052,   // pixel 7 기준 45
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -72,9 +72,10 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'LOGIN',
                     style: TextStyle(
+                      fontSize: screenHeight * 0.016,
                       color: Colors.black87,
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w700,
@@ -82,12 +83,12 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: screenHeight * 0.012,   // pixel 7 기준 10
               ),
               SizedBox(
                 width: double.infinity,
-                height: 45,
+                height: screenHeight * 0.052,
                 child: OutlinedButton(
                   onPressed: () {
                     Navigator.push(
@@ -103,9 +104,10 @@ class HomePage extends StatelessWidget {
                     ),
                     side: const BorderSide(color: Colors.white, width: 1),
                   ),
-                  child: const Text(
+                  child: Text(
                     'SIGN UP',
                     style: TextStyle(
+                      fontSize: screenHeight * 0.016,
                       color: Colors.white,
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w700,
@@ -113,20 +115,19 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              // const SizedBox(
-              //   height: 250,
-              // ),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: GestureDetector(
                     onTap: () {}, // '게스트로 계속' 구현 필요
-                    child: const Text(
+                    child: Text(
                       'Continue to as a guest',
                       style: TextStyle(
+                        fontSize: screenHeight * 0.016,
                         decoration: TextDecoration.underline,
                         decorationColor: Colors.white70,
                         decorationStyle: TextDecorationStyle.dotted,
+                        decorationThickness: 1.5,
                         color: Colors.white,
                         fontFamily: 'Geo',
                       ),

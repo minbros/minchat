@@ -62,8 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: screenHeight * 0.024,
                 ),
                 SizedBox(
                   child: Form(
@@ -165,8 +165,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: screenHeight * 0.016,
                 ),
                 SizedBox(
                   width: double.infinity,
@@ -186,8 +186,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: screenHeight * 0.035,
                 ),
                 SizedBox(
                   width: double.infinity,
@@ -211,14 +211,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 80,
+                SizedBox(
+                  height: screenHeight * 0.092,
                 ),
                 const Divider(
                   color: Colors.white70,
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: screenHeight * 0.024,
                 ),
                 Row(
                   children: [
