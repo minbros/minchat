@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
     );
     return MaterialApp(
-      title: 'MINchat',
+      title: 'minchat',
       theme: ThemeData(),
       home: const HomePage(),
       debugShowCheckedModeBanner: false,

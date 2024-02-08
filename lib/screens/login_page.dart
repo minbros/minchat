@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'sign_up_page.dart';
+import 'package:minchat/config/validator.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,7 +11,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   bool _isVisible = false;
+  bool _autoValidate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -63,111 +67,179 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(
-                  height: screenHeight * 0.024,
-                ),
+                SizedBox(height: screenHeight * 0.024),
                 SizedBox(
                   child: Form(
+                    key: _formKey,
+                    autovalidateMode: _autoValidate
+                        ? AutovalidateMode.onUserInteraction
+                        : null,
                     child: Column(
                       children: [
                         // 이메일 입력란
-                        SizedBox(
-                          height: screenHeight * 0.054,
-                          child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                // enabledBorder는 활성화 상태일 때의 경계선을 설정함
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(screenHeight * 0.012)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(screenHeight * 0.012)),
-                              ),
-                              hintText: 'Email Address',
-                              hintStyle: TextStyle(
-                                fontSize: screenHeight * 0.016,
-                                color: Colors.white70,
-                                fontFamily: 'Geo',
-                                fontWeight: FontWeight.bold,
-                              ),
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: screenWidth * 0.035,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white12,
-                              border: InputBorder.none,
+                        TextFormField(
+                          validator: (value) {
+                            return validateEmail(value);
+                          },
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              // enabledBorder는 활성화 상태일 때의 경계선을 설정함
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(screenHeight * 0.012)),
                             ),
-                            style: TextStyle(
-                              fontSize: screenHeight * 0.016,
-                              color: Colors.white,
+                            focusedBorder: OutlineInputBorder(
+                              // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(screenHeight * 0.012)),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(screenHeight * 0.012)),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(screenHeight * 0.012)),
+                            ),
+                            errorStyle: const TextStyle(
+                              fontFamily: 'Geo',
+                            ),
+                            hintText: 'Email Address',
+                            hintStyle: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white70,
                               fontFamily: 'Geo',
                               fontWeight: FontWeight.bold,
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.035,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white12,
+                            border: InputBorder.none,
+                          ),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontFamily: 'Geo',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.012),
+                        // 비밀번호 입력란
+                        TextFormField(
+                          validator: (value) {
+                            return validatePassword(value);
+                          },
+                          obscureText: _isVisible ? false : true,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(screenHeight * 0.012)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(screenHeight * 0.012)),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(screenHeight * 0.012)),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(screenHeight * 0.012)),
+                            ),
+                            hintText: 'Password',
+                            hintStyle: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white70,
+                              fontFamily: 'Geo',
+                              fontWeight: FontWeight.bold,
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.035,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white12,
+                            border: InputBorder.none,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isVisible = !_isVisible;
+                                });
+                              },
+                              icon: Icon(
+                                _isVisible
+                                    ? Icons.visibility_off_outlined
+                                    : Icons.visibility_outlined,
+                              ),
+                              color: Colors.white70,
+                            ),
+                          ),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontFamily: 'Geo',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.016),
+                        SizedBox(
+                          width: double.infinity,
+                          child: GestureDetector(
+                            onTap: () {}, // 비밀번호 찾기 기능 구현 필요
+                            child: Text(
+                              'Forgot Password?',
+                              style: TextStyle(
+                                fontSize: screenHeight * 0.016,
+                                fontFamily: 'Geo',
+                                color: Colors.white,
+                                decoration: TextDecoration.underline,
+                                decorationColor: Colors.white70,
+                                decorationStyle: TextDecorationStyle.dotted,
+                                decorationThickness: 1.5,
+                              ),
+                              textAlign: TextAlign.right,
                             ),
                           ),
                         ),
+                        SizedBox(height: screenHeight * 0.035),
                         SizedBox(
-                          height: screenHeight * 0.012,
-                        ),
-                        // 비밀번호 입력란
-                        SizedBox(
+                          width: double.infinity,
                           height: screenHeight * 0.054,
-                          child: TextFormField(
-                            obscureText: _isVisible ? false : true,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                // enabledBorder는 활성화 상태일 때의 경계선을 설정함
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(screenHeight * 0.012)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(screenHeight * 0.012)),
-                              ),
-                              hintText: 'Password',
-                              hintStyle: TextStyle(
-                                fontSize: screenHeight * 0.016,
-                                color: Colors.white70,
-                                fontFamily: 'Geo',
-                                fontWeight: FontWeight.bold,
-                              ),
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: screenWidth * 0.035,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white12,
-                              border: InputBorder.none,
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _isVisible = !_isVisible;
-                                  });
-                                },
-                                icon: Icon(
-                                  _isVisible
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_outlined,
-                                  size: screenHeight * 0.026,
-                                ),
-                                color: Colors.white70,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {}
+                              else {
+                                setState(() {
+                                  _autoValidate = true;
+                                });
+                              }
+                            }, // 로그인 이후 구현 필요
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              elevation: 4,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(screenHeight * 0.012),
                               ),
                             ),
-                            style: TextStyle(
-                              fontSize: screenHeight * 0.016,
-                              color: Colors.white,
-                              fontFamily: 'Geo',
-                              fontWeight: FontWeight.bold,
+                            child: Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                fontSize: screenHeight * 0.016,
+                                color: Colors.black87,
+                                fontFamily: 'Gilroy',
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -175,64 +247,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: screenHeight * 0.016,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: GestureDetector(
-                    onTap: () {}, // 비밀번호 찾기 기능 구현 필요
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        fontSize: screenHeight * 0.016,
-                        fontFamily: 'Geo',
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.white70,
-                        decorationStyle: TextDecorationStyle.dotted,
-                        decorationThickness: 1.5,
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.035,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: screenHeight * 0.054,
-                  child: ElevatedButton(
-                    onPressed: () {}, // 로그인 이후 구현 필요
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      elevation: 4,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(screenHeight * 0.012),
-                      ),
-                    ),
-                    child: Text(
-                      'LOGIN',
-                      style: TextStyle(
-                        fontSize: screenHeight * 0.016,
-                        color: Colors.black87,
-                        fontFamily: 'Gilroy',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.092,
-                ),
+                SizedBox(height: screenHeight * 0.092),
                 const Divider(
                   color: Colors.white70,
                 ),
-                SizedBox(
-                  height: screenHeight * 0.024,
-                ),
+                SizedBox(height: screenHeight * 0.024),
                 Row(
                   children: [
                     SizedBox(
