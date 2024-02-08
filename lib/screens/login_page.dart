@@ -72,21 +72,23 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         // 이메일 입력란
                         SizedBox(
-                          height: screenHeight * 0.052,
+                          height: screenHeight * 0.054,
                           child: TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
+                              enabledBorder: OutlineInputBorder(
                                 // enabledBorder는 활성화 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(screenHeight * 0.012)),
                               ),
-                              focusedBorder: const OutlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
                                 // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(screenHeight * 0.012)),
                               ),
                               hintText: 'Email Address',
                               hintStyle: TextStyle(
@@ -115,21 +117,23 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         // 비밀번호 입력란
                         SizedBox(
-                          height: screenHeight * 0.052,
+                          height: screenHeight * 0.054,
                           child: TextFormField(
                             obscureText: _isVisible ? false : true,
                             decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
+                              enabledBorder: OutlineInputBorder(
                                 // enabledBorder는 활성화 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(screenHeight * 0.012)),
                               ),
-                              focusedBorder: const OutlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
                                 // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(screenHeight * 0.012)),
                               ),
                               hintText: 'Password',
                               hintStyle: TextStyle(
@@ -198,14 +202,15 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(
                   width: double.infinity,
-                  height: screenHeight * 0.052,
+                  height: screenHeight * 0.054,
                   child: ElevatedButton(
                     onPressed: () {}, // 로그인 이후 구현 필요
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       elevation: 4,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius:
+                            BorderRadius.circular(screenHeight * 0.012),
                       ),
                     ),
                     child: Text(
@@ -231,40 +236,48 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   children: [
                     SizedBox(
-                      width: (screenRatio >= 2) ? screenWidth * 0.385 : screenWidth * 0.337,
-                      height: screenHeight * 0.052,
+                      width: (screenRatio >= 2)
+                          ? screenWidth * 0.385
+                          : screenWidth * 0.337,
+                      height: screenHeight * 0.054,
                       child: ElevatedButton(
                         onPressed: () {}, // 구글로 로그인 기능 구현 필요
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           elevation: 4,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius:
+                                BorderRadius.circular(screenHeight * 0.012),
                           ),
                         ),
                         child: Container(
-                          margin: const EdgeInsets.all(5),
+                          margin: EdgeInsets.all(screenHeight * 0.006),
                           child: Image.asset('assets/login_google.png'),
                         ),
                       ),
                     ),
                     SizedBox(
-                      width: (screenRatio >= 2) ? screenWidth * 0.03 : screenWidth * 0.026,
+                      width: (screenRatio >= 2)
+                          ? screenWidth * 0.03
+                          : screenWidth * 0.026,
                     ),
                     SizedBox(
-                      width: (screenRatio >= 2) ? screenWidth * 0.385 : screenWidth * 0.337,
-                      height: screenHeight * 0.052,
+                      width: (screenRatio >= 2)
+                          ? screenWidth * 0.385
+                          : screenWidth * 0.337,
+                      height: screenHeight * 0.054,
                       child: ElevatedButton(
                         onPressed: () {}, // 페이스북으로 로그인 기능 구현 필요
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           elevation: 4,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius:
+                                BorderRadius.circular(screenHeight * 0.012),
                           ),
                         ),
                         child: Container(
-                          margin: const EdgeInsets.all(5),
+                          margin: EdgeInsets.all(screenHeight * 0.006),
                           child: Image.asset('assets/login_facebook.png'),
                         ),
                       ),

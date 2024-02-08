@@ -38,13 +38,14 @@ class HomePage extends StatelessWidget {
             children: [
               Icon(
                 Icons.emoji_emotions,
-                size: screenHeight * 0.115,   // pixel 7 기준 100
+                size: screenHeight * 0.115, // pixel 7 기준 100
                 color: Colors.white70,
               ),
               Text(
                 'MIN CHAT',
                 style: TextStyle(
-                    fontSize: screenHeight * 0.035,   // pixel 7 기준 30
+                    fontSize: screenHeight * 0.035,
+                    // pixel 7 기준 30
                     letterSpacing: 0.5,
                     wordSpacing: 1,
                     fontWeight: FontWeight.bold,
@@ -57,7 +58,7 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 // 상위 컨테이너에서 padding을 해줬기 때문에 가로로 끝까지 늘리기만 하면 됨
-                height: screenHeight * 0.052,   // pixel 7 기준 45
+                height: screenHeight * 0.054, // pixel 7 기준 45
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
                     backgroundColor: Colors.white,
                     elevation: 4,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(screenHeight * 0.012),
                     ),
                   ),
                   child: Text(
@@ -85,11 +86,11 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 10,   // pixel 7 기준 10
+                height: 10, // pixel 7 기준 10
               ),
               SizedBox(
                 width: double.infinity,
-                height: screenHeight * 0.052,
+                height: screenHeight * 0.054,
                 child: OutlinedButton(
                   onPressed: () {
                     Navigator.push(
@@ -101,7 +102,7 @@ class HomePage extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(screenHeight * 0.012),
                     ),
                     side: const BorderSide(color: Colors.white, width: 1),
                   ),
