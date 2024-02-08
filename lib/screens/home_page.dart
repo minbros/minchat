@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
           (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
           screenHeight * 0.3,
           (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
-          screenHeight * 0.06,
+          screenHeight * 0.05,
         ),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
                 height: screenHeight * 0.054, // pixel 7 기준 45
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const LoginPage()),
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                 height: screenHeight * 0.054,
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const SignUpPage()),

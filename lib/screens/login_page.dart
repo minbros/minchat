@@ -31,9 +31,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Container(
           padding: EdgeInsets.fromLTRB(
             (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
-            screenHeight * 0.17,
+            screenHeight * 0.15,
             (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
-            screenHeight * 0.06,
+            screenHeight * 0.05,
           ),
           decoration: const BoxDecoration(
             gradient: LinearGradient(

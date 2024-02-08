@@ -32,9 +32,9 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Container(
           padding: EdgeInsets.fromLTRB(
             (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
-            screenHeight * 0.17,
+            screenHeight * 0.15,
             (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
-            screenHeight * 0.06,
+            screenHeight * 0.05,
           ),
           // 배경 그라데이션
           decoration: const BoxDecoration(
