@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenRatio = screenHeight / screenWidth;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -17,9 +18,9 @@ class HomePage extends StatelessWidget {
       // bottom에 정렬된 위젯이 키보드 위로 올라와서 위젯이 겹쳐버려서 에러가 발생하게 됨
       body: Container(
         padding: EdgeInsets.fromLTRB(
-          screenWidth * 0.1,
+          (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
           screenHeight * 0.3,
-          screenWidth * 0.1,
+          (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
           screenHeight * 0.06,
         ),
         decoration: const BoxDecoration(
@@ -83,8 +84,8 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: screenHeight * 0.012,   // pixel 7 기준 10
+              const SizedBox(
+                height: 10,   // pixel 7 기준 10
               ),
               SizedBox(
                 width: double.infinity,

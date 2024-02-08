@@ -19,6 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenRatio = screenHeight / screenWidth;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -28,9 +29,9 @@ class _SignUpPageState extends State<SignUpPage> {
         },
         child: Container(
           padding: EdgeInsets.fromLTRB(
-            screenWidth * 0.1,
+            (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
             screenHeight * 0.17,
-            screenWidth * 0.1,
+            (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
             screenHeight * 0.06,
           ),
           // 배경 그라데이션
@@ -48,21 +49,21 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               children: [
                 // Welcome,
-                const Text(
+                Text(
                   'Create Account',
                   style: TextStyle(
                     fontFamily: 'Geo',
                     fontWeight: FontWeight.bold,
-                    fontSize: 33,
+                    fontSize: screenHeight * 0.038,
                     color: Colors.white,
                   ),
                 ),
                 // Glad to see you!
-                const Text(
+                Text(
                   'to get started now!',
                   style: TextStyle(
                     fontFamily: 'Geo',
-                    fontSize: 33,
+                    fontSize: screenHeight * 0.038,
                     letterSpacing: -0.5,
                     color: Colors.white,
                   ),
@@ -77,14 +78,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         // 이메일 입력란
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
+                          decoration: InputDecoration(
+                            enabledBorder: const OutlineInputBorder(
                               // enabledBorder는 활성화 상태일 때의 경계선을 설정함
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius:
@@ -92,12 +93,12 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                             hintText: 'Email Address',
                             hintStyle: TextStyle(
-                              fontSize: 14,
+                              fontSize: screenHeight * 0.016,
                               color: Colors.white70,
                               fontFamily: 'Geo',
                               fontWeight: FontWeight.bold,
                             ),
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                               vertical: 10,
                               horizontal: 15,
                             ),
@@ -105,8 +106,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             fillColor: Colors.white12,
                             border: InputBorder.none,
                           ),
-                          style: const TextStyle(
-                            fontSize: 14,
+                          style: TextStyle(
+                            fontSize: screenHeight * 0.016,
                             color: Colors.white,
                             fontFamily: 'Geo',
                             fontWeight: FontWeight.bold,
@@ -132,8 +133,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   BorderRadius.all(Radius.circular(10)),
                             ),
                             hintText: 'Password',
-                            hintStyle: const TextStyle(
-                              fontSize: 14,
+                            hintStyle: TextStyle(
+                              fontSize: screenHeight * 0.016,
                               color: Colors.white70,
                               fontFamily: 'Geo',
                               fontWeight: FontWeight.bold,
@@ -159,8 +160,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               color: Colors.white70,
                             ),
                           ),
-                          style: const TextStyle(
-                            fontSize: 14,
+                          style: TextStyle(
+                            fontSize: screenHeight * 0.016,
                             color: Colors.white,
                             fontFamily: 'Geo',
                             fontWeight: FontWeight.bold,
@@ -185,8 +186,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   BorderRadius.all(Radius.circular(10)),
                             ),
                             hintText: 'Confirm Password',
-                            hintStyle: const TextStyle(
-                              fontSize: 14,
+                            hintStyle: TextStyle(
+                              fontSize: screenHeight * 0.016,
                               color: Colors.white70,
                               fontFamily: 'Geo',
                               fontWeight: FontWeight.bold,
@@ -212,8 +213,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               color: Colors.white70,
                             ),
                           ),
-                          style: const TextStyle(
-                            fontSize: 14,
+                          style: TextStyle(
+                            fontSize: screenHeight * 0.016,
                             color: Colors.white,
                             fontFamily: 'Geo',
                             fontWeight: FontWeight.bold,
@@ -228,7 +229,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(
                   width: double.infinity,
-                  height: 45,
+                  height: screenHeight * 0.052,
                   child: ElevatedButton(
                     onPressed: () {}, // 회원 가입 이후 구현 필요
                     style: ElevatedButton.styleFrom(
