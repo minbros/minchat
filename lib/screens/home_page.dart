@@ -52,9 +52,7 @@ class HomePage extends StatelessWidget {
                     color: Colors.white70,
                     fontFamily: 'Gilroy'),
               ),
-              SizedBox(
-                height: screenHeight * 0.08,
-              ),
+              SizedBox(height: screenHeight * 0.08),
               SizedBox(
                 width: double.infinity,
                 // 상위 컨테이너에서 padding을 해줬기 때문에 가로로 끝까지 늘리기만 하면 됨
@@ -74,10 +72,9 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(screenHeight * 0.012),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'LOGIN',
                     style: TextStyle(
-                      fontSize: screenHeight * 0.016,
                       color: Colors.black87,
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w700,
@@ -85,9 +82,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10, // pixel 7 기준 10
-              ),
+              SizedBox(height: screenHeight * 0.012),
               SizedBox(
                 width: double.infinity,
                 height: screenHeight * 0.054,
@@ -106,10 +101,9 @@ class HomePage extends StatelessWidget {
                     ),
                     side: const BorderSide(color: Colors.white, width: 1),
                   ),
-                  child: Text(
+                  child: const Text(
                     'SIGN UP',
                     style: TextStyle(
-                      fontSize: screenHeight * 0.016,
                       color: Colors.white,
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w700,

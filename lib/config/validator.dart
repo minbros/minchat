@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 String? validateEmail(String? email) {
   if (email == null || email.isEmpty) {
     return 'Please enter your email address.';
@@ -34,6 +36,34 @@ String? validatePassword(String? password) {
   }
   if (!isValid) {
     return 'Password must contain case and numbers.';
+  }
+
+  return null;
+}
+
+String? validateConfirm(String? confirm, TextEditingController controller) {
+  if (confirm == null || confirm.isEmpty) {
+    return 'Please confirm your password.';
+  }
+
+  final passwordRegex = RegExp(
+    r'^(?=.*[A-Za-z])(?=.*\d)',
+  );
+  final passwordLengthRegex = RegExp(
+    r'[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$',
+  );
+  bool isValid = passwordRegex.hasMatch(confirm);
+  bool isLengthValid = passwordLengthRegex.hasMatch(confirm);
+
+  if (!isLengthValid) {
+    return 'Password must contain at least 8 characters.';
+  }
+  if (!isValid) {
+    return 'Password must contain case and numbers.';
+  }
+
+  if (confirm != controller.text) {
+    return 'Passwords do not match.';
   }
 
   return null;

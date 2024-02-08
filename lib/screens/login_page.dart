@@ -68,12 +68,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.024),
-                SizedBox(
-                  child: Form(
-                    key: _formKey,
-                    autovalidateMode: _autoValidate
-                        ? AutovalidateMode.onUserInteraction
-                        : null,
+                Form(
+                  key: _formKey,
+                  autovalidateMode:
+                      _autoValidate ? AutovalidateMode.onUserInteraction : null,
+                  child: SingleChildScrollView(
                     child: Column(
                       children: [
                         // 이메일 입력란
@@ -157,6 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.all(
                                   Radius.circular(screenHeight * 0.012)),
                             ),
+                            errorStyle: const TextStyle(
+                              fontFamily: 'Geo',
+                            ),
                             hintText: 'Password',
                             hintStyle: const TextStyle(
                               fontSize: 14,
@@ -217,8 +219,8 @@ class _LoginPageState extends State<LoginPage> {
                           height: screenHeight * 0.054,
                           child: ElevatedButton(
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {}
-                              else {
+                              if (_formKey.currentState!.validate()) {
+                              } else {
                                 setState(() {
                                   _autoValidate = true;
                                 });
@@ -232,10 +234,9 @@ class _LoginPageState extends State<LoginPage> {
                                     BorderRadius.circular(screenHeight * 0.012),
                               ),
                             ),
-                            child: Text(
+                            child: const Text(
                               'LOGIN',
                               style: TextStyle(
-                                fontSize: screenHeight * 0.016,
                                 color: Colors.black87,
                                 fontFamily: 'Gilroy',
                                 fontWeight: FontWeight.bold,
