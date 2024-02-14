@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
                 height: screenHeight * 0.054, // pixel 7 기준 45
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const LoginPage()),
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                 height: screenHeight * 0.054,
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const SignUpPage()),

@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:minchat/screens/chat_main_page.dart';
 import 'package:minchat/screens/login_page.dart';
 import 'package:minchat/config/validator.dart';
+import 'package:minchat/config/palette.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -13,9 +16,12 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
+  final _authentication = FirebaseAuth.instance;
 
   bool _isVisible = false;
   bool _autoValidate = false;
+  String userEmail = '';
+  String userPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -77,196 +83,206 @@ class _SignUpPageState extends State<SignUpPage> {
                   key: _formKey,
                   autovalidateMode:
                       _autoValidate ? AutovalidateMode.onUserInteraction : null,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        // 이메일 입력란
-                        TextFormField(
-                          validator: (value) {
-                            return validateEmail(value);
-                          },
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              // enabledBorder는 활성화 상태일 때의 경계선을 설정함
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            errorStyle: const TextStyle(
-                              fontFamily: 'Geo',
-                            ),
-                            hintText: 'Email Address',
-                            hintStyle: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white70,
-                              fontFamily: 'Geo',
-                              fontWeight: FontWeight.bold,
-                            ),
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.035,
-                            ),
-                            filled: true,
-                            fillColor: Colors.white12,
-                            border: InputBorder.none,
+                  child: Column(
+                    children: [
+                      // 이메일 입력란
+                      TextFormField(
+                        validator: (value) {
+                          return validateEmail(value);
+                        },
+                        onSaved: (value) {
+                          userEmail = value!;
+                        },
+                        onChanged: (value) {
+                          userEmail = value;
+                        },
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            // enabledBorder는 활성화 상태일 때의 경계선을 설정함
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
                           ),
-                          style: const TextStyle(
+                          focusedBorder: OutlineInputBorder(
+                            // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          errorStyle: const TextStyle(
+                            fontFamily: 'Geo',
+                          ),
+                          hintText: 'Email Address',
+                          hintStyle: const TextStyle(
                             fontSize: 14,
-                            color: Colors.white,
+                            color: Colors.white70,
                             fontFamily: 'Geo',
                             fontWeight: FontWeight.bold,
                           ),
-                        ),
-                        SizedBox(height: screenHeight * 0.012),
-                        // 비밀번호 입력란
-                        TextFormField(
-                          controller: _passwordController,
-                          validator: (value) {
-                            return validatePassword(value);
-                          },
-                          obscureText: _isVisible ? false : true,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            errorStyle: const TextStyle(
-                              fontFamily: 'Geo',
-                            ),
-                            hintText: 'Password',
-                            hintStyle: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white70,
-                              fontFamily: 'Geo',
-                              fontWeight: FontWeight.bold,
-                            ),
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.035,
-                            ),
-                            filled: true,
-                            fillColor: Colors.white12,
-                            border: InputBorder.none,
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _isVisible = !_isVisible;
-                                });
-                              },
-                              icon: Icon(
-                                _isVisible
-                                    ? Icons.visibility_off_outlined
-                                    : Icons.visibility_outlined,
-                              ),
-                              color: Colors.white70,
-                            ),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.035,
                           ),
-                          style: const TextStyle(
+                          filled: true,
+                          fillColor: Colors.white12,
+                          border: InputBorder.none,
+                        ),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontFamily: 'Geo',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.012),
+                      // 비밀번호 입력란
+                      TextFormField(
+                        controller: _passwordController,
+                        validator: (value) {
+                          return validatePassword(value);
+                        },
+                        onSaved: (value) {
+                          userPassword = value!;
+                        },
+                        onChanged: (value) {
+                          userPassword = value;
+                        },
+                        obscureText: _isVisible ? false : true,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          errorStyle: const TextStyle(
+                            fontFamily: 'Geo',
+                          ),
+                          hintText: 'Password',
+                          hintStyle: const TextStyle(
                             fontSize: 14,
-                            color: Colors.white,
+                            color: Colors.white70,
                             fontFamily: 'Geo',
                             fontWeight: FontWeight.bold,
                           ),
-                        ),
-                        SizedBox(height: screenHeight * 0.012),
-                        TextFormField(
-                          validator: (value) {
-                            return validateConfirm(value, _passwordController);
-                          },
-                          obscureText: _isVisible ? false : true,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              // enabledBorder는 활성화 상태일 때의 경계선을 설정함
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(screenHeight * 0.012)),
-                            ),
-                            errorStyle: const TextStyle(
-                              fontFamily: 'Geo',
-                            ),
-                            hintText: 'Confirm Password',
-                            hintStyle: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white70,
-                              fontFamily: 'Geo',
-                              fontWeight: FontWeight.bold,
-                            ),
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.035,
-                            ),
-                            filled: true,
-                            fillColor: Colors.white12,
-                            border: InputBorder.none,
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _isVisible = !_isVisible;
-                                });
-                              },
-                              icon: Icon(
-                                _isVisible
-                                    ? Icons.visibility_off_outlined
-                                    : Icons.visibility_outlined,
-                              ),
-                              color: Colors.white70,
-                            ),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.035,
                           ),
-                          style: const TextStyle(
+                          filled: true,
+                          fillColor: Colors.white12,
+                          border: InputBorder.none,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _isVisible = !_isVisible;
+                              });
+                            },
+                            icon: Icon(
+                              _isVisible
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined,
+                            ),
+                            color: Colors.white70,
+                          ),
+                        ),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontFamily: 'Geo',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.012),
+                      TextFormField(
+                        validator: (value) {
+                          return validateConfirm(value, _passwordController);
+                        },
+                        obscureText: _isVisible ? false : true,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            // enabledBorder는 활성화 상태일 때의 경계선을 설정함
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            // focusedBorder는 해당 텍스트폼에 텍스트를 입력하는 상태일 때의 경계선을 설정함
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenHeight * 0.012)),
+                          ),
+                          errorStyle: const TextStyle(
+                            fontFamily: 'Geo',
+                          ),
+                          hintText: 'Confirm Password',
+                          hintStyle: const TextStyle(
                             fontSize: 14,
-                            color: Colors.white,
+                            color: Colors.white70,
                             fontFamily: 'Geo',
                             fontWeight: FontWeight.bold,
                           ),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.035,
+                          ),
+                          filled: true,
+                          fillColor: Colors.white12,
+                          border: InputBorder.none,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _isVisible = !_isVisible;
+                              });
+                            },
+                            icon: Icon(
+                              _isVisible
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined,
+                            ),
+                            color: Colors.white70,
+                          ),
                         ),
-                      ],
-                    ),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontFamily: 'Geo',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.035),
@@ -274,8 +290,62 @@ class _SignUpPageState extends State<SignUpPage> {
                   width: double.infinity,
                   height: screenHeight * 0.054,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        try {
+                          final newUser = await _authentication
+                              .createUserWithEmailAndPassword(
+                            email: userEmail,
+                            password: userPassword,
+                          );
+
+                          if (newUser.user != null) {
+                            if (!context.mounted) return;
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ChatMainPage()));
+                          }
+                        } catch (e) {
+                          debugPrint('$e');
+                          if (!context.mounted) return;
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                // title: Text(
+                                //   'Sign Up Failed',
+                                //   textAlign: TextAlign.center,
+                                // ),
+                                // titleTextStyle: TextStyle(
+                                //   fontSize: 26,
+                                //   color: Colors.white,
+                                //   fontFamily: 'Geo',
+                                // ),
+                                content: const Text(
+                                  'Please try it again in a moment.',
+                                  textAlign: TextAlign.center,
+                                ),
+                                contentTextStyle: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white70,
+                                  fontFamily: 'Geo',
+                                ),
+                                backgroundColor: Palette.alertColor,
+                                elevation: 4,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(screenHeight * 0.012),
+                                ),
+                                icon: const Icon(
+                                  Icons.error,
+                                  size: 45,
+                                ),
+                              );
+                            },
+                          );
+                        }
                       } else {
                         setState(() {
                           _autoValidate = true;
