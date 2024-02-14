@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:minchat/config/palette.dart';
+import 'package:minchat/screens/chat_main_page.dart';
 import 'package:minchat/screens/sign_up_page.dart';
 import 'package:minchat/config/validator.dart';
 
@@ -13,10 +15,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _authentication = FirebaseAuth.instance;
 
   bool _isVisible = false;
   bool _autoValidate = false;
-
+  String userEmail = '';
+  String userPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +86,10 @@ class _LoginPageState extends State<LoginPage> {
                           return validateEmail(value);
                         },
                         onSaved: (value) {
-
+                          userEmail = value!;
+                        },
+                        onChanged: (value) {
+                          userEmail = value;
                         },
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
@@ -99,12 +106,14 @@ class _LoginPageState extends State<LoginPage> {
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Palette.errorColor),
+                            borderSide:
+                                const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Palette.errorColor),
+                            borderSide:
+                                const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
@@ -139,6 +148,12 @@ class _LoginPageState extends State<LoginPage> {
                         validator: (value) {
                           return validatePassword(value);
                         },
+                        onSaved: (value) {
+                          userPassword = value!;
+                        },
+                        onChanged: (value) {
+                          userPassword = value;
+                        },
                         obscureText: _isVisible ? false : true,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -152,12 +167,14 @@ class _LoginPageState extends State<LoginPage> {
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Palette.errorColor),
+                            borderSide:
+                                const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Palette.errorColor),
+                            borderSide:
+                                const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
@@ -224,9 +241,54 @@ class _LoginPageState extends State<LoginPage> {
                         width: double.infinity,
                         height: screenHeight * 0.054,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
+                              try {
+                                final newUser = await _authentication
+                                    .signInWithEmailAndPassword(
+                                  email: userEmail,
+                                  password: userPassword,
+                                );
 
+                                if (newUser.user != null) {
+                                  if (!context.mounted) return;
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                          const ChatMainPage()));
+                                }
+                              } catch (e) {
+                                debugPrint('$e');
+                                if (!context.mounted) return;
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: const Text(
+                                        'Please check your email and password.',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      contentTextStyle: TextStyle(
+                                        fontSize: screenHeight * 0.018,
+                                        color: Colors.white70,
+                                        fontFamily: 'Geo',
+                                      ),
+                                      backgroundColor: Palette.alertColor,
+                                      elevation: 4,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(screenHeight * 0.012),
+                                      ),
+                                      icon: Icon(
+                                        Icons.error,
+                                        size: screenHeight * 0.06,
+                                      ),
+                                      iconColor: const Color(0xd0540a0a),
+                                    );
+                                  },
+                                );
+                              }
                             } else {
                               setState(() {
                                 _autoValidate = true;

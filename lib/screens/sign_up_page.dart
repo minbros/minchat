@@ -304,33 +304,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
                           if (newUser.user != null) {
                             if (!context.mounted) return;
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  content: const Text(
-                                    'Please try it again in a moment.',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  contentTextStyle: TextStyle(
-                                    fontSize: screenHeight * 0.018,
-                                    color: Colors.white70,
-                                    fontFamily: 'Geo',
-                                  ),
-                                  backgroundColor: Palette.alertColor,
-                                  elevation: 4,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(screenHeight * 0.012),
-                                  ),
-                                  icon: Icon(
-                                    Icons.error,
-                                    size: screenHeight * 0.06,
-                                  ),
-                                  iconColor: const Color(0xd0540a0a),
-                                );
-                              },
-                            );
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -340,7 +313,33 @@ class _SignUpPageState extends State<SignUpPage> {
                         } catch (e) {
                           debugPrint('$e');
                           if (!context.mounted) return;
-
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                content: const Text(
+                                  'Please try it again in a moment.',
+                                  textAlign: TextAlign.center,
+                                ),
+                                contentTextStyle: TextStyle(
+                                  fontSize: screenHeight * 0.018,
+                                  color: Colors.white70,
+                                  fontFamily: 'Geo',
+                                ),
+                                backgroundColor: Palette.alertColor,
+                                elevation: 4,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(screenHeight * 0.012),
+                                ),
+                                icon: Icon(
+                                  Icons.error,
+                                  size: screenHeight * 0.06,
+                                ),
+                                iconColor: const Color(0xd0540a0a),
+                              );
+                            },
+                          );
                         }
                       } else {
                         setState(() {
