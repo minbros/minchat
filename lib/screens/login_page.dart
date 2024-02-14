@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'sign_up_page.dart';
+import 'package:minchat/config/palette.dart';
+import 'package:minchat/screens/sign_up_page.dart';
 import 'package:minchat/config/validator.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _isVisible = false;
   bool _autoValidate = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +81,9 @@ class _LoginPageState extends State<LoginPage> {
                         validator: (value) {
                           return validateEmail(value);
                         },
+                        onSaved: (value) {
+
+                        },
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -94,17 +99,18 @@ class _LoginPageState extends State<LoginPage> {
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorStyle: const TextStyle(
                             fontFamily: 'Geo',
+                            color: Palette.errorColor,
                           ),
                           hintText: 'Email Address',
                           hintStyle: const TextStyle(
@@ -146,17 +152,18 @@ class _LoginPageState extends State<LoginPage> {
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorStyle: const TextStyle(
                             fontFamily: 'Geo',
+                            color: Palette.errorColor,
                           ),
                           hintText: 'Password',
                           hintStyle: const TextStyle(
@@ -219,6 +226,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
+
                             } else {
                               setState(() {
                                 _autoValidate = true;

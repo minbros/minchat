@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
-import 'sign_up_page.dart';
+import 'package:minchat/screens/login_page.dart';
+import 'package:minchat/screens/sign_up_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

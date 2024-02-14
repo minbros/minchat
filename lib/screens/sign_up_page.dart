@@ -111,17 +111,18 @@ class _SignUpPageState extends State<SignUpPage> {
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorStyle: const TextStyle(
                             fontFamily: 'Geo',
+                            color: Palette.errorColor,
                           ),
                           hintText: 'Email Address',
                           hintStyle: const TextStyle(
@@ -170,17 +171,18 @@ class _SignUpPageState extends State<SignUpPage> {
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorStyle: const TextStyle(
                             fontFamily: 'Geo',
+                            color: Palette.errorColor,
                           ),
                           hintText: 'Password',
                           hintStyle: const TextStyle(
@@ -236,17 +238,18 @@ class _SignUpPageState extends State<SignUpPage> {
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Palette.errorColor),
                             borderRadius: BorderRadius.all(
                                 Radius.circular(screenHeight * 0.012)),
                           ),
                           errorStyle: const TextStyle(
                             fontFamily: 'Geo',
+                            color: Palette.errorColor,
                           ),
                           hintText: 'Confirm Password',
                           hintStyle: const TextStyle(
@@ -291,33 +294,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: screenHeight * 0.054,
                   child: ElevatedButton(
                     onPressed: () async {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            content: const Text(
-                              'Please try it again in a moment.',
-                              textAlign: TextAlign.center,
-                            ),
-                            contentTextStyle: TextStyle(
-                              fontSize: screenHeight * 0.018,
-                              color: Colors.white70,
-                              fontFamily: 'Geo',
-                            ),
-                            backgroundColor: Palette.alertColor,
-                            elevation: 4,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(screenHeight * 0.012),
-                            ),
-                            icon: Icon(
-                              Icons.error,
-                              size: screenHeight * 0.06,
-                            ),
-                            iconColor: const Color(0xbd540a0a),
-                          );
-                        },
-                      );
                       if (_formKey.currentState!.validate()) {
                         try {
                           final newUser = await _authentication
@@ -328,6 +304,33 @@ class _SignUpPageState extends State<SignUpPage> {
 
                           if (newUser.user != null) {
                             if (!context.mounted) return;
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: const Text(
+                                    'Please try it again in a moment.',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  contentTextStyle: TextStyle(
+                                    fontSize: screenHeight * 0.018,
+                                    color: Colors.white70,
+                                    fontFamily: 'Geo',
+                                  ),
+                                  backgroundColor: Palette.alertColor,
+                                  elevation: 4,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(screenHeight * 0.012),
+                                  ),
+                                  icon: Icon(
+                                    Icons.error,
+                                    size: screenHeight * 0.06,
+                                  ),
+                                  iconColor: const Color(0xd0540a0a),
+                                );
+                              },
+                            );
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
