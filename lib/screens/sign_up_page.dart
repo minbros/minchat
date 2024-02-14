@@ -291,6 +291,33 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: screenHeight * 0.054,
                   child: ElevatedButton(
                     onPressed: () async {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            content: const Text(
+                              'Please try it again in a moment.',
+                              textAlign: TextAlign.center,
+                            ),
+                            contentTextStyle: TextStyle(
+                              fontSize: screenHeight * 0.018,
+                              color: Colors.white70,
+                              fontFamily: 'Geo',
+                            ),
+                            backgroundColor: Palette.alertColor,
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(screenHeight * 0.012),
+                            ),
+                            icon: Icon(
+                              Icons.error,
+                              size: screenHeight * 0.06,
+                            ),
+                            iconColor: const Color(0xbd540a0a),
+                          );
+                        },
+                      );
                       if (_formKey.currentState!.validate()) {
                         try {
                           final newUser = await _authentication
@@ -310,41 +337,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         } catch (e) {
                           debugPrint('$e');
                           if (!context.mounted) return;
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                // title: Text(
-                                //   'Sign Up Failed',
-                                //   textAlign: TextAlign.center,
-                                // ),
-                                // titleTextStyle: TextStyle(
-                                //   fontSize: 26,
-                                //   color: Colors.white,
-                                //   fontFamily: 'Geo',
-                                // ),
-                                content: const Text(
-                                  'Please try it again in a moment.',
-                                  textAlign: TextAlign.center,
-                                ),
-                                contentTextStyle: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white70,
-                                  fontFamily: 'Geo',
-                                ),
-                                backgroundColor: Palette.alertColor,
-                                elevation: 4,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(screenHeight * 0.012),
-                                ),
-                                icon: const Icon(
-                                  Icons.error,
-                                  size: 45,
-                                ),
-                              );
-                            },
-                          );
+
                         }
                       } else {
                         setState(() {
