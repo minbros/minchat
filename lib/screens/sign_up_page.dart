@@ -318,7 +318,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 content: const Text(
-                                  'Please try it again in a moment.',
+                                  'Please try it again later.',
                                   textAlign: TextAlign.center,
                                 ),
                                 contentTextStyle: TextStyle(

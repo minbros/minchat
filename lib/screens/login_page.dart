@@ -19,8 +19,8 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _isVisible = false;
   bool _autoValidate = false;
-  String userEmail = '';
-  String userPassword = '';
+  String _userEmail = '';
+  String _userPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +86,10 @@ class _LoginPageState extends State<LoginPage> {
                           return validateEmail(value);
                         },
                         onSaved: (value) {
-                          userEmail = value!;
+                          _userEmail = value!;
                         },
                         onChanged: (value) {
-                          userEmail = value;
+                          _userEmail = value;
                         },
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
@@ -149,10 +149,10 @@ class _LoginPageState extends State<LoginPage> {
                           return validatePassword(value);
                         },
                         onSaved: (value) {
-                          userPassword = value!;
+                          _userPassword = value!;
                         },
                         onChanged: (value) {
-                          userPassword = value;
+                          _userPassword = value;
                         },
                         obscureText: _isVisible ? false : true,
                         decoration: InputDecoration(
@@ -246,27 +246,28 @@ class _LoginPageState extends State<LoginPage> {
                               try {
                                 final newUser = await _authentication
                                     .signInWithEmailAndPassword(
-                                  email: userEmail,
-                                  password: userPassword,
+                                  email: _userEmail,
+                                  password: _userPassword,
                                 );
-
                                 if (newUser.user != null) {
                                   if (!context.mounted) return;
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                          const ChatMainPage()));
+                                              const ChatMainPage()));
                                 }
-                              } catch (e) {
+                              } on FirebaseAuthException catch (e) {
                                 debugPrint('$e');
                                 if (!context.mounted) return;
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      content: const Text(
-                                        'Please check your email and password.',
+                                      content: Text(
+                                        (e.code == 'invalid-credential')
+                                            ? 'Plase check your email and password.'
+                                            : 'Please try it again later.',
                                         textAlign: TextAlign.center,
                                       ),
                                       contentTextStyle: TextStyle(
@@ -277,14 +278,14 @@ class _LoginPageState extends State<LoginPage> {
                                       backgroundColor: Palette.alertColor,
                                       elevation: 4,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(screenHeight * 0.012),
+                                        borderRadius: BorderRadius.circular(
+                                            screenHeight * 0.012),
                                       ),
                                       icon: Icon(
                                         Icons.error,
                                         size: screenHeight * 0.06,
                                       ),
-                                      iconColor: const Color(0xd0540a0a),
+                                      iconColor: Palette.errorColor,
                                     );
                                   },
                                 );
