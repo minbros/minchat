@@ -1,6 +1,6 @@
 # minchat
 
-My project app for chat.
+My flutter project app for chat.
 
 ## Getting Started
 
