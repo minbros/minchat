@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minchat/firebase_options.dart';
+import 'package:minchat/screens/chat_home_page.dart';
 import 'package:minchat/screens/home_page.dart';
 
 void main() async {
@@ -23,10 +25,18 @@ class MyApp extends StatelessWidget {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
     );
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'minchat',
       theme: ThemeData(),
-      home: const HomePage(),
-      debugShowCheckedModeBanner: false,
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const ChatHomePage();
+          }
+          return const HomePage();
+        },
+      ),
     );
   }
 }

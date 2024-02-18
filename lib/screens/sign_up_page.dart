@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:minchat/screens/chat_main_page.dart';
 import 'package:minchat/screens/login_page.dart';
 import 'package:minchat/config/validator.dart';
 import 'package:minchat/config/palette.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -20,8 +20,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   bool _isVisible = false;
   bool _autoValidate = false;
-  String userEmail = '';
-  String userPassword = '';
+  String _userEmail = '';
+  String _userPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -91,10 +91,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           return validateEmail(value);
                         },
                         onSaved: (value) {
-                          userEmail = value!;
+                          _userEmail = value!;
                         },
                         onChanged: (value) {
-                          userEmail = value;
+                          _userEmail = value;
                         },
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
@@ -153,10 +153,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           return validatePassword(value);
                         },
                         onSaved: (value) {
-                          userPassword = value!;
+                          _userPassword = value!;
                         },
                         onChanged: (value) {
-                          userPassword = value;
+                          _userPassword = value;
                         },
                         obscureText: _isVisible ? false : true,
                         decoration: InputDecoration(
@@ -298,18 +298,28 @@ class _SignUpPageState extends State<SignUpPage> {
                         try {
                           final newUser = await _authentication
                               .createUserWithEmailAndPassword(
-                            email: userEmail,
-                            password: userPassword,
+                            email: _userEmail,
+                            password: _userPassword,
                           );
 
-                          if (newUser.user != null) {
-                            if (!context.mounted) return;
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ChatMainPage()));
-                          }
+                          FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(newUser.user!.uid)
+                              .set({
+                            'email': _userEmail,
+                          });
+
+                          if (!context.mounted) return;
+                          Navigator.pop(context);
+
+                          // if (newUser.user != null) {
+                          //   if (!context.mounted) return;
+                          //   Navigator.pushReplacement(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (context) =>
+                          //               const ChatHomePage()));
+                          // }
                         } catch (e) {
                           debugPrint('$e');
                           if (!context.mounted) return;
@@ -322,7 +332,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   textAlign: TextAlign.center,
                                 ),
                                 contentTextStyle: TextStyle(
-                                  fontSize: screenHeight * 0.018,
+                                  fontSize: screenHeight * 0.022,
                                   color: Colors.white70,
                                   fontFamily: 'Geo',
                                 ),

@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:minchat/config/palette.dart';
-import 'package:minchat/screens/chat_main_page.dart';
 import 'package:minchat/screens/sign_up_page.dart';
 import 'package:minchat/config/validator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -249,14 +249,25 @@ class _LoginPageState extends State<LoginPage> {
                                   email: _userEmail,
                                   password: _userPassword,
                                 );
-                                if (newUser.user != null) {
-                                  if (!context.mounted) return;
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const ChatMainPage()));
-                                }
+
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(newUser.user!.uid)
+                                    .set({
+                                  'email': _userEmail,
+                                });
+
+                                if (!context.mounted) return;
+                                Navigator.pop(context);
+
+                                // if (newUser.user != null) {
+                                //   if (!context.mounted) return;
+                                //   Navigator.pushReplacement(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //           builder: (context) =>
+                                //               const ChatHomePage()));
+                                // }
                               } on FirebaseAuthException catch (e) {
                                 debugPrint('$e');
                                 if (!context.mounted) return;
@@ -266,12 +277,12 @@ class _LoginPageState extends State<LoginPage> {
                                     return AlertDialog(
                                       content: Text(
                                         (e.code == 'invalid-credential')
-                                            ? 'Plase check your email and password.'
+                                            ? 'Please check your email and password.'
                                             : 'Please try it again later.',
                                         textAlign: TextAlign.center,
                                       ),
                                       contentTextStyle: TextStyle(
-                                        fontSize: screenHeight * 0.018,
+                                        fontSize: screenHeight * 0.022,
                                         color: Colors.white70,
                                         fontFamily: 'Geo',
                                       ),
