@@ -67,7 +67,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
                       textAlign: TextAlign.center,
                     ),
                     contentTextStyle: TextStyle(
-                      fontSize: screenHeight * 0.022,
+                      fontSize: screenHeight * 0.018,
                       color: Colors.white,
                       fontFamily: 'Geo',
                     ),
@@ -83,45 +83,53 @@ class _ChatHomePageState extends State<ChatHomePage> {
                     ),
                     iconColor: const Color(0xd0540a0a),
                     actions: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          _authentication.signOut();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xff6c72e6),
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(screenHeight * 0.012),
+                      SizedBox(
+                        height: screenHeight * 0.035,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            _authentication.signOut();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff6c72e6),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(screenHeight * 0.012),
+                            ),
+                            elevation: 4,
                           ),
-                        ),
-                        child: const Text(
-                          'YES',
-                          style: TextStyle(
-                            fontFamily: 'Gilroy',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          child: const Text(
+                            'YES',
+                            style: TextStyle(
+                              fontFamily: 'Gilroy',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: screenWidth * 0.02),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(screenHeight * 0.012),
+                      SizedBox(
+                        height: screenHeight * 0.035,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(screenHeight * 0.012),
+                            ),
+                            elevation: 4,
                           ),
-                        ),
-                        child: const Text(
-                          'NO',
-                          style: TextStyle(
-                            fontFamily: 'Gilroy',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                          child: const Text(
+                            'NO',
+                            style: TextStyle(
+                              fontFamily: 'Gilroy',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),

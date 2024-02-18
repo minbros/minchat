@@ -332,8 +332,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   textAlign: TextAlign.center,
                                 ),
                                 contentTextStyle: TextStyle(
-                                  fontSize: screenHeight * 0.022,
-                                  color: Colors.white70,
+                                  fontSize: screenHeight * 0.018,
+                                  color: Colors.white,
                                   fontFamily: 'Geo',
                                 ),
                                 backgroundColor: Palette.alertColor,
