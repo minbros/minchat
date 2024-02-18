@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:minchat/config/customs.dart';
 import 'package:minchat/config/palette.dart';
 
 class ChatHomePage extends StatefulWidget {
@@ -86,6 +85,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
                     actions: [
                       ElevatedButton(
                         onPressed: () {
+                          Navigator.pop(context);
                           _authentication.signOut();
                         },
                         style: ElevatedButton.styleFrom(
