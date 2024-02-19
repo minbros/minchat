@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minchat/chat/chat_rooms_list.dart';
 import 'package:minchat/config/palette.dart';
 
@@ -54,15 +55,16 @@ class _ChatHomePageState extends State<ChatHomePage> {
         ),
         // appBar의 배경색을 투명하게 지정해야 기존의 LinearGradient를 배경으로 쓸 수 있음
         actions: [
+          IconButton(onPressed: () {}, icon: const Icon(FontAwesomeIcons.peopleGroup)),
           IconButton(
             onPressed: () {
-              _store.collection('user').doc(loggedUser!.uid).collection('chatRooms').add({
+              _store.collection('users').doc(loggedUser!.uid).collection('chatRooms').add({
                 'name': 'Must modify it later',
                 'time': Timestamp.now(),
               });
             },
             icon: const Icon(
-              Icons.add_comment_rounded,
+              Icons.add_comment
             ),
           ),
           IconButton(

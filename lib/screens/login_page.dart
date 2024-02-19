@@ -17,6 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _authentication = FirebaseAuth.instance;
+  final _store = FirebaseFirestore.instance;
 
   bool _isVisible = false;
   bool _autoValidate = false;
@@ -260,7 +261,7 @@ class _LoginPageState extends State<LoginPage> {
                                     password: _userPassword,
                                   );
 
-                                  FirebaseFirestore.instance
+                                  _store
                                       .collection('users')
                                       .doc(newUser.user!.uid)
                                       .set({

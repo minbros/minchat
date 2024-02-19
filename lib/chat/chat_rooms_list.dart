@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:minchat/chat/chat_room.dart';
+import 'package:minchat/screens/chat_page.dart';
 
 class ChatRoomsList extends StatefulWidget {
   const ChatRoomsList({super.key});
@@ -14,7 +16,6 @@ class _ChatRoomsListState extends State<ChatRoomsList> {
   final _auth = FirebaseAuth.instance;
 
   User? loggedUser;
-  final debugControl = false;
 
   @override
   void initState() {
@@ -39,56 +40,55 @@ class _ChatRoomsListState extends State<ChatRoomsList> {
 
   @override
   Widget build(BuildContext context) {
-    if (debugControl) {
-      return const Placeholder();
-    } else {
-      if (loggedUser != null) {
-        return StreamBuilder(
-          stream: _store
-              .collection('user')
-              .doc(loggedUser!.uid)
-              .collection('chatRooms')
-              .orderBy(
-                'time',
-                descending: true,
-              )
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            }
+    return StreamBuilder(
+      stream: _store
+          .collection('users')
+          .doc(loggedUser!.uid)
+          .collection('chatRooms')
+          .orderBy(
+            'time',
+            descending: true,
+          )
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
 
-            final chatRooms = snapshot.data!.docs;
+        final chatRooms = snapshot.data!.docs;
 
-            return ListView.builder(
-              itemCount: chatRooms.length,
-              itemBuilder: (context, index) {
-                final chatRoom = chatRooms[index];
+        return ListView.builder(
+          itemCount: chatRooms.length,
+          itemBuilder: (context, index) {
+            final chatRoom = chatRooms[index];
 
-                return ListTile(
-                  title: Text(
-                    chatRoom['name'],
-                    style: const TextStyle(
-                      fontFamily: 'Geo',
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    'Modify it',
-                    style: const TextStyle(
-                      fontFamily: 'Geo',
-                      color: Colors.white,
-                    ),
-                  ),
-                  onTap: () {},
-                );
+            return ListTile(
+              title: Text(
+                chatRoom['name'],
+                style: const TextStyle(
+                  fontFamily: 'Geo',
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(
+                'Modify it',
+                style: const TextStyle(
+                  fontFamily: 'Geo',
+                  color: Colors.white,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ChatPage(
+                      userID: loggedUser!.uid,
+                      roomID: chatRoom.id,
+                    )));
               },
             );
           },
         );
-      }
-      return const Placeholder();
-    }
+      },
+    );
   }
 }

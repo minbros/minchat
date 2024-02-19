@@ -1,19 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class ChatRoom extends StatefulWidget {
-  const ChatRoom({super.key});
+class ChatRoom extends StatelessWidget {
+  ChatRoom({super.key, required this.userID, required this.roomID});
+  final String userID;
+  final String roomID;
 
-  @override
-  State<ChatRoom> createState() => _ChatRoomState();
-}
+  final _store = FirebaseFirestore.instance;
 
-class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
+    final String pathInFirebase = 'users/$userID/chatRooms/$roomID/chats';
+
     return Center(
-      child: ListView.builder(itemBuilder: (context, index) {
-        
-      })
+      child: StreamBuilder(
+        stream: _store.collection(pathInFirebase).orderBy('time').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+
+          final messages = snapshot.data!.docs;
+
+          return ListView.builder(itemCount: messages.length, itemBuilder: (context, index) {
+            return const Placeholder();
+          });
+        },
+      )
     );
   }
 }

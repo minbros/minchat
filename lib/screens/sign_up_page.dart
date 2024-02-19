@@ -18,6 +18,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
   final _authentication = FirebaseAuth.instance;
+  final _store = FirebaseFirestore.instance;
 
   bool _isVisible = false;
   bool _autoValidate = false;
@@ -315,12 +316,14 @@ class _SignUpPageState extends State<SignUpPage> {
                               password: _userPassword,
                             );
 
-                            FirebaseFirestore.instance
+                            _store
                                 .collection('users')
                                 .doc(newUser.user!.uid)
                                 .set({
                               'email': _userEmail,
                             });
+                            
+                            // _store.collection('users').doc(newUser.user!.uid).set(data)
 
                             if (!context.mounted) return;
                             Navigator.pop(context);
