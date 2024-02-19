@@ -12,7 +12,7 @@ class ChatRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String pathInFirebase = 'users/$userID/chatRooms/$roomID/chats';
+    final String pathInFirebase = 'chatRooms/$roomID/chats';
 
     return Center(
       child: StreamBuilder(

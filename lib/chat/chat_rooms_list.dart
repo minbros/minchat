@@ -40,15 +40,7 @@ class _ChatRoomsListState extends State<ChatRoomsList> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: _store
-          .collection('users')
-          .doc(loggedUser!.uid)
-          .collection('chatRooms')
-          .orderBy(
-            'time',
-            descending: true,
-          )
-          .snapshots(),
+      stream: _store.collection('chatRooms').orderBy('time').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
@@ -78,11 +70,11 @@ class _ChatRoomsListState extends State<ChatRoomsList> {
                 ),
               ),
               onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ChatPage(
-                      userID: loggedUser!.uid,
-                      roomID: chatRoom.id,
-                    )));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ChatPage(
+                          userID: loggedUser!.uid,
+                          roomID: chatRoom.id,
+                        )));
               },
             );
           },

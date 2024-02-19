@@ -19,16 +19,16 @@ class _NewMessageState extends State<NewMessage> {
 
   void sendMessage() {
     _store
-        .collection('users/${widget.userID}/chatRooms/${widget.roomID}/chats')
+        .collection('chatRooms/${widget.roomID}/chats')
         .add({
       'text': userEnteringText,
-      'time': Timestamp.now(),
+      'time': FieldValue.serverTimestamp(),
       'userID': widget.userID,
     });
     _store
-        .collection('users/${widget.userID}/chatRooms')
+        .collection('chatRooms')
         .doc(widget.roomID)
-        .set({'time': Timestamp.now()});
+        .update({'time': FieldValue.serverTimestamp()});
     _controller.clear();
   }
 

@@ -58,9 +58,10 @@ class _ChatHomePageState extends State<ChatHomePage> {
           IconButton(onPressed: () {}, icon: const Icon(FontAwesomeIcons.peopleGroup)),
           IconButton(
             onPressed: () {
-              _store.collection('users').doc(loggedUser!.uid).collection('chatRooms').add({
+              _store.collection('chatRooms').add({
                 'name': 'Must modify it later',
                 'time': Timestamp.now(),
+                'participants': FieldValue.arrayUnion([_authentication.currentUser!.uid])
               });
             },
             icon: const Icon(
