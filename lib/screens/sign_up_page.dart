@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:minchat/screens/login_page.dart';
@@ -36,6 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
       resizeToAvoidBottomInset: false,
       body: ModalProgressHUD(
         inAsyncCall: _showSpinning,
+        opacity: 0.2,
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();

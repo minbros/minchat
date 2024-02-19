@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:minchat/chat/chat_room.dart';
+import 'package:minchat/chat/chat_rooms_list.dart';
 import 'package:minchat/config/palette.dart';
 
 class ChatHomePage extends StatefulWidget {
@@ -39,6 +41,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenRatio = screenHeight / screenWidth;
 
     return Scaffold(
       extendBodyBehindAppBar: true, // appBar가 body 위로 오도록 함
@@ -94,7 +97,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
                             backgroundColor: const Color(0xff6c72e6),
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                              BorderRadius.circular(screenHeight * 0.012),
+                                  BorderRadius.circular(screenHeight * 0.012),
                             ),
                             elevation: 4,
                           ),
@@ -119,7 +122,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                              BorderRadius.circular(screenHeight * 0.012),
+                                  BorderRadius.circular(screenHeight * 0.012),
                             ),
                             elevation: 4,
                           ),
@@ -156,6 +159,13 @@ class _ChatHomePageState extends State<ChatHomePage> {
               Color.fromRGBO(140, 173, 255, 1),
             ],
           ),
+        ),
+        child: const ChatRoomsList(),
+        padding: EdgeInsets.fromLTRB(
+          (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
+          screenHeight * 0.135,
+          (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
+          screenHeight * 0.05,
         ),
       ),
     );

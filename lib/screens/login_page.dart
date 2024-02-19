@@ -35,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       body: ModalProgressHUD(
         inAsyncCall: _showSpinner,
+        opacity: 0.2,
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
