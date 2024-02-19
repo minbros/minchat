@@ -42,6 +42,7 @@ class ChatPage extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(child: ChatRoom(userID: userID, roomID: roomID)),
+                  SizedBox(height: screenHeight * 0.008),
                   NewMessage(userID: userID, roomID: roomID),
                 ],
               ),

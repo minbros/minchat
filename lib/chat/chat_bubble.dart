@@ -2,37 +2,42 @@ import 'package:flutter/material.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({super.key, required this.text, required this.isMe});
+
   final String text;
   final bool isMe;
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenRatio = screenHeight / screenWidth;
+
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: isMe ? Colors.blue : Colors.grey[300],
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(12),
-              topLeft: Radius.circular(12),
-              bottomRight: isMe ? Radius.circular(0) : Radius.circular(12),
-              bottomLeft: isMe ? Radius.circular(12) : Radius.circular(0),
+        GestureDetector(
+          onLongPress: () {}, // 챗버블 길게 누를 시의 기능 구현 필요
+          child: Container(
+            decoration: BoxDecoration(
+              color: !isMe
+                  ? Color.fromRGBO(230, 230, 255, 1)
+                  : Color.fromRGBO(150, 150, 255, 1),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(screenHeight * 0.012)),
             ),
-          ),
-          width: 145,
-          padding: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 16,
-          ),
-          margin: const EdgeInsets.symmetric(
-            vertical: 4,
-            horizontal: 8,
-          ),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: isMe ? Colors.white : Colors.black,
+            padding: EdgeInsets.symmetric(
+              vertical: screenHeight * 0.012,
+              horizontal: screenWidth * 0.03,
+            ),
+            margin: EdgeInsets.symmetric(vertical: screenHeight * 0.006),
+            child: Text(
+              text,
+              style: TextStyle(
+                color: isMe ? Colors.white : Colors.black,
+                fontFamily: 'Geo',
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: isMe ? TextAlign.end : TextAlign.start,
             ),
           ),
         ),

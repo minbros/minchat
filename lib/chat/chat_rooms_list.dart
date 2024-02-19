@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:minchat/config/palette.dart';
 import 'package:minchat/screens/chat_page.dart';
 
 class ChatRoomsList extends StatefulWidget {
@@ -39,8 +40,13 @@ class _ChatRoomsListState extends State<ChatRoomsList> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return StreamBuilder(
-      stream: _store.collection('chatRooms').orderBy('time').snapshots(),
+      stream: _store
+          .collection('chatRooms')
+          .orderBy('time', descending: true)
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
@@ -54,19 +60,26 @@ class _ChatRoomsListState extends State<ChatRoomsList> {
             final chatRoom = chatRooms[index];
 
             return ListTile(
+              leading: Icon(
+                Icons.account_circle,
+                size: screenHeight * 0.05,
+                color: Palette.appBarIconColor,
+              ),
               title: Text(
                 chatRoom['name'],
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'Geo',
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
+                  fontSize: screenHeight * 0.02,
                 ),
               ),
               subtitle: Text(
                 'Modify it',
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'Geo',
                   color: Colors.white,
+                  fontSize: screenHeight * 0.015,
                 ),
               ),
               onTap: () {
