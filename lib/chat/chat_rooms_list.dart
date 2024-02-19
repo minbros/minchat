@@ -48,6 +48,10 @@ class _ChatRoomsListState extends State<ChatRoomsList> {
               .collection('user')
               .doc(loggedUser!.uid)
               .collection('chatRooms')
+              .orderBy(
+                'time',
+                descending: true,
+              )
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -62,7 +66,21 @@ class _ChatRoomsListState extends State<ChatRoomsList> {
                 final chatRoom = chatRooms[index];
 
                 return ListTile(
-                  title: Text(chatRoom['name']),
+                  title: Text(
+                    chatRoom['name'],
+                    style: const TextStyle(
+                      fontFamily: 'Geo',
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    'Modify it',
+                    style: const TextStyle(
+                      fontFamily: 'Geo',
+                      color: Colors.white,
+                    ),
+                  ),
                   onTap: () {},
                 );
               },

@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:minchat/chat/chat_room.dart';
 import 'package:minchat/chat/chat_rooms_list.dart';
 import 'package:minchat/config/palette.dart';
 
@@ -13,6 +13,7 @@ class ChatHomePage extends StatefulWidget {
 
 class _ChatHomePageState extends State<ChatHomePage> {
   final _authentication = FirebaseAuth.instance;
+  final _store = FirebaseFirestore.instance;
 
   User? loggedUser;
 
@@ -54,7 +55,12 @@ class _ChatHomePageState extends State<ChatHomePage> {
         // appBar의 배경색을 투명하게 지정해야 기존의 LinearGradient를 배경으로 쓸 수 있음
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _store.collection('user').doc(loggedUser!.uid).collection('chatRooms').add({
+                'name': 'Must modify it later',
+                'time': Timestamp.now(),
+              });
+            },
             icon: const Icon(
               Icons.add_comment_rounded,
             ),
@@ -99,7 +105,6 @@ class _ChatHomePageState extends State<ChatHomePage> {
                               borderRadius:
                                   BorderRadius.circular(screenHeight * 0.012),
                             ),
-                            elevation: 4,
                           ),
                           child: const Text(
                             'YES',
@@ -124,7 +129,6 @@ class _ChatHomePageState extends State<ChatHomePage> {
                               borderRadius:
                                   BorderRadius.circular(screenHeight * 0.012),
                             ),
-                            elevation: 4,
                           ),
                           child: const Text(
                             'NO',
@@ -160,13 +164,13 @@ class _ChatHomePageState extends State<ChatHomePage> {
             ],
           ),
         ),
-        child: const ChatRoomsList(),
         padding: EdgeInsets.fromLTRB(
-          (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
-          screenHeight * 0.135,
-          (screenRatio >= 2) ? screenWidth * 0.1 : screenWidth * 0.15,
+          (screenRatio >= 2) ? screenWidth * 0.05 : screenWidth * 0.1,
+          screenHeight * 0,
+          (screenRatio >= 2) ? screenWidth * 0.05 : screenWidth * 0.1,
           screenHeight * 0.05,
         ),
+        child: const SafeArea(child: ChatRoomsList()),
       ),
     );
   }
