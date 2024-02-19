@@ -100,21 +100,20 @@ class _ChatHomePageState extends State<ChatHomePage> {
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);
-                            _authentication.signOut();
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff6c72e6),
+                            backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(screenHeight * 0.012),
+                              BorderRadius.circular(screenHeight * 0.012),
                             ),
                           ),
                           child: const Text(
-                            'YES',
+                            'NO',
                             style: TextStyle(
                               fontFamily: 'Gilroy',
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -125,20 +124,21 @@ class _ChatHomePageState extends State<ChatHomePage> {
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);
+                            _authentication.signOut();
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
+                            backgroundColor: const Color(0xff6c72e6),
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.circular(screenHeight * 0.012),
+                              BorderRadius.circular(screenHeight * 0.012),
                             ),
                           ),
                           child: const Text(
-                            'NO',
+                            'YES',
                             style: TextStyle(
                               fontFamily: 'Gilroy',
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                           ),
                         ),
