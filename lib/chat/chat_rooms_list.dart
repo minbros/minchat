@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:minchat/chat/chat_room.dart';
 import 'package:minchat/screens/chat_page.dart';
 
 class ChatRoomsList extends StatefulWidget {

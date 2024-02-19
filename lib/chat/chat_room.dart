@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:minchat/chat/chat_bubble.dart';
 
 class ChatRoom extends StatelessWidget {
   ChatRoom({super.key, required this.userID, required this.roomID});
+
   final String userID;
   final String roomID;
 
@@ -16,17 +18,21 @@ class ChatRoom extends StatelessWidget {
       child: StreamBuilder(
         stream: _store.collection(pathInFirebase).orderBy('time').snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          }
+          // if (snapshot.connectionState == ConnectionState.waiting) {
+          //   return const CircularProgressIndicator();
+          // }
 
-          final messages = snapshot.data!.docs;
-
-          return ListView.builder(itemCount: messages.length, itemBuilder: (context, index) {
-            return const Placeholder();
-          });
+          final chatDocs = snapshot.data!.docs;
+          return ListView.builder(
+            itemCount: chatDocs.length,
+            itemBuilder: (context, index) {
+              return ChatBubble(
+                  text: chatDocs[index]['text'],
+                  isMe: chatDocs[index]['userID'] == userID);
+            },
+          );
         },
-      )
+      ),
     );
   }
 }
