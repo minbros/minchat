@@ -22,9 +22,10 @@ class CustomErrorAlertDialog extends AlertDialog {
           ),
           contentTextStyle: TextStyle(
             fontSize: height * 0.018,
-            color: Colors.white70,
+            color: Colors.white,
             fontFamily: 'Geo',
           ),
+          // contentPadding: EdgeInsets.symmetric(vertical: height * 0.01),
           backgroundColor: Palette.alertColor,
           elevation: 4,
           shape: RoundedRectangleBorder(
@@ -35,5 +36,6 @@ class CustomErrorAlertDialog extends AlertDialog {
             size: height * 0.06,
           ),
           iconColor: Palette.errorColor,
+          // iconPadding: EdgeInsets.only(top: height * 0.01),
         );
 }

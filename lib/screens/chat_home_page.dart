@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minchat/chat/chat_rooms_list.dart';
+import 'package:minchat/config/customs.dart';
 import 'package:minchat/config/palette.dart';
 
 class ChatHomePage extends StatefulWidget {
@@ -55,45 +56,27 @@ class _ChatHomePageState extends State<ChatHomePage> {
         ),
         // appBar의 배경색을 투명하게 지정해야 기존의 LinearGradient를 배경으로 쓸 수 있음
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(FontAwesomeIcons.peopleGroup)),
+          IconButton(
+              onPressed: () {}, icon: const Icon(FontAwesomeIcons.peopleGroup)),
           IconButton(
             onPressed: () {
               _store.collection('chatRooms').add({
                 'name': 'Must modify it later',
                 'time': Timestamp.now(),
-                'participants': FieldValue.arrayUnion([_authentication.currentUser!.uid])
+                'participants':
+                    FieldValue.arrayUnion([_authentication.currentUser!.uid])
               });
             },
-            icon: const Icon(
-              Icons.add_comment
-            ),
+            icon: const Icon(Icons.add_comment),
           ),
           IconButton(
             onPressed: () {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return AlertDialog(
-                    content: const Text(
-                      'Are you sure you want to log out?',
-                      textAlign: TextAlign.center,
-                    ),
-                    contentTextStyle: TextStyle(
-                      fontSize: screenHeight * 0.018,
-                      color: Colors.white,
-                      fontFamily: 'Geo',
-                    ),
-                    // contentPadding: EdgeInsets.symmetric(vertical: screenHeight * 0.02, horizontal: screenWidth * 0.05),
-                    backgroundColor: Palette.alertColor,
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(screenHeight * 0.012),
-                    ),
-                    icon: Icon(
-                      Icons.error,
-                      size: screenHeight * 0.06,
-                    ),
-                    iconColor: const Color(0xd0540a0a),
+                  return CustomErrorAlertDialog(
+                    text: 'Are you sure you want to log out?',
+                    height: screenHeight,
                     actions: [
                       SizedBox(
                         height: screenHeight * 0.035,
@@ -105,7 +88,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                              BorderRadius.circular(screenHeight * 0.012),
+                                  BorderRadius.circular(screenHeight * 0.012),
                             ),
                           ),
                           child: const Text(
@@ -130,7 +113,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
                             backgroundColor: const Color(0xff6c72e6),
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                              BorderRadius.circular(screenHeight * 0.012),
+                                  BorderRadius.circular(screenHeight * 0.012),
                             ),
                           ),
                           child: const Text(
@@ -145,7 +128,8 @@ class _ChatHomePageState extends State<ChatHomePage> {
                       ),
                     ],
                     actionsAlignment: MainAxisAlignment.center,
-                    // actionsPadding: EdgeInsets.symmetric(horizontal: 20),
+                    // actionsPadding:
+                    //     EdgeInsets.only(top: screenHeight * 0.005, bottom: screenHeight * 0.015),
                   );
                 },
               );

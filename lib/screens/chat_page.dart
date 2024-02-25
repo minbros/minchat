@@ -22,6 +22,7 @@ class ChatPage extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Palette.appBarIconColor,
         ),
+
       ),
       body: GestureDetector(
         onTap: () {

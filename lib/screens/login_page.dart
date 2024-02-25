@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:minchat/config/palette.dart';
 import 'package:minchat/screens/sign_up_page.dart';
 import 'package:minchat/config/validator.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,7 +16,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _authentication = FirebaseAuth.instance;
-  final _store = FirebaseFirestore.instance;
 
   bool _isVisible = false;
   bool _autoValidate = false;
@@ -255,18 +253,18 @@ class _LoginPageState extends State<LoginPage> {
                                 });
 
                                 try {
-                                  final newUser = await _authentication
+                                  await _authentication
                                       .signInWithEmailAndPassword(
                                     email: _userEmail,
                                     password: _userPassword,
                                   );
 
-                                  _store
-                                      .collection('users')
-                                      .doc(newUser.user!.uid)
-                                      .set({
-                                    'email': _userEmail,
-                                  });
+                                  // _store
+                                  //     .collection('users')
+                                  //     .doc(newUser.user!.uid)
+                                  //     .set({
+                                  //   'email': _userEmail,
+                                  // });
 
                                   if (!context.mounted) return;
                                   Navigator.pop(context);
