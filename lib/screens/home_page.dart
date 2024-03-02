@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
             children: [
               Icon(
                 Icons.emoji_emotions,
-                size: screenHeight * 0.115, // pixel 7 기준 100
+                size: screenHeight * 0.1,
                 color: Colors.white70,
               ),
               Text(
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
                     color: Colors.white70,
                     fontFamily: 'Gilroy'),
               ),
-              SizedBox(height: screenHeight * 0.08),
+              SizedBox(height: screenHeight * 0.04),
               SizedBox(
                 width: double.infinity,
                 // 상위 컨테이너에서 padding을 해줬기 때문에 가로로 끝까지 늘리기만 하면 됨

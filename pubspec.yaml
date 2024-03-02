@@ -36,8 +36,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   firebase_core: ^2.25.4
-  firebase_auth: ^4.17.4
-  cloud_firestore: ^4.15.4
+  firebase_auth: ^4.17.5
+  cloud_firestore: ^4.15.5
   modal_progress_hud_nsn: ^0.5.1
   font_awesome_flutter: ^10.7.0
   line_icons: ^2.0.3
@@ -52,6 +52,13 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.3
+  flutter_launcher_icons: ^0.9.3
+
+#flutter_icons:
+#  android: true
+#  ios: true
+#  remove_alpha_ios: true
+#  image_path: "assets/minchat_icon3.webp"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -68,6 +75,8 @@ flutter:
   assets:
     - assets/login_facebook.png
     - assets/login_google.png
+    - assets/minchat_icon.png
+    - assets/minchat_icon_transparent.webp
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

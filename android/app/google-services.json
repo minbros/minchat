@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "172658170069",
+    "project_id": "chat-app-coding-chef-minbros",
+    "storage_bucket": "chat-app-coding-chef-minbros.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172658170069:android:1405f5215ee0788f106a5c",
+        "android_client_info": {
+          "package_name": "com.example.minchat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATn_UxpS7zLmC82MGuoouFhrz-buIjguA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
